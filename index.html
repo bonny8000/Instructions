@@ -206,17 +206,17 @@
       data.append("duration", duration);
 
       fetch(url, {
-        method: "POST",
-        body: data,
-      })
-        .then((response) => response.text())
-        .then((result) => {
-          console.log("Logged:", result);
-        })
-        .catch((error) => {
-          console.error("Error logging to sheet:", error);
-        });
-    }
+      method: "POST",
+      headers: {
+      "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+      userId: userId,
+      test: activeTest,
+      duration: duration
+      }),
+    })
+
   </script>
 </body>
 </html>
