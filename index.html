@@ -12,19 +12,16 @@
       margin: 0;
       color: #2c2c2c;
     }
-
     h1 {
       text-align: center;
       font-size: 2rem;
       margin-bottom: 1.5rem;
     }
-
     .section-title {
       font-size: 1.25rem;
       margin: 2rem 0 1rem;
       font-weight: bold;
     }
-
     .step-container {
       display: flex;
       justify-content: center;
@@ -32,7 +29,6 @@
       flex-wrap: wrap;
       margin-bottom: 1rem;
     }
-
     .step {
       background: #ecebff;
       border-radius: 12px;
@@ -41,35 +37,29 @@
       width: 180px;
       box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
     }
-
     .step-title {
       font-weight: bold;
       margin-bottom: 0.5rem;
     }
-
     .highlight {
       color: #4b3bf6;
     }
-
     .user-id-display {
       text-align: center;
       font-size: 1.1rem;
       margin-top: 2rem;
       margin-bottom: 0.5rem;
     }
-
     .first-task {
       text-align: center;
       font-weight: bold;
       margin-bottom: 1.5rem;
     }
-
     .buttons {
       display: flex;
       justify-content: center;
       gap: 2rem;
     }
-
     .button {
       background: #ecebff;
       color: #333;
@@ -80,11 +70,9 @@
       cursor: pointer;
       transition: background 0.3s;
     }
-
     .button:hover {
       background: #dad6fd;
     }
-
     .timer {
       text-align: center;
       font-size: 1rem;
@@ -92,7 +80,6 @@
       color: #4b3bf6;
       font-weight: bold;
     }
-
     .stop-button {
       display: block;
       margin: 1rem auto;
@@ -103,7 +90,6 @@
       border-radius: 8px;
       cursor: pointer;
     }
-
     .stop-button:hover {
       background-color: #392dd4;
     }
@@ -178,18 +164,17 @@
       timerDisplay.textContent = `Timer stopped. Duration: ${duration} seconds.`;
       stopButton.style.display = "none";
 
-      const url = "https://script.google.com/macros/s/AKfycbw5vv0BtSDpXPL_w1xbQLcPPJoVj-M5ooRoc82vNO2145P8FPLL37yZSaD2SufMUdUH/exec";
+      const formData = new URLSearchParams();
+      formData.append("userId", userId);
+      formData.append("test", activeTest);
+      formData.append("duration", duration);
 
       fetch("https://script.google.com/macros/s/AKfycbw5vv0BtSDpXPL_w1xbQLcPPJoVj-M5ooRoc82vNO2145P8FPLL37yZSaD2SufMUdUH/exec", {
         method: "POST",
         headers: {
-          "Content-Type": "application/json"
+          "Content-Type": "application/x-www-form-urlencoded"
         },
-        body: JSON.stringify({
-          userId: userId,
-          test: activeTest,
-          duration: duration
-        }),
+        body: formData
       })
       .then(res => res.text())
       .then(data => {
@@ -202,4 +187,3 @@
   </script>
 </body>
 </html>
-
