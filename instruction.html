@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Prototype Instructions</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #f7f7fb;
+      padding: 2rem;
+      margin: 0;
+      color: #2c2c2c;
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 2rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .section-title {
+      font-size: 1.25rem;
+      margin: 2rem 0 1rem;
+      font-weight: bold;
+    }
+
+    .step-container {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 1rem;
+    }
+
+    .step {
+      background: #ecebff;
+      border-radius: 12px;
+      padding: 1rem;
+      text-align: center;
+      width: 180px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+    }
+
+    .step-title {
+      font-weight: bold;
+      margin-bottom: 0.5rem;
+    }
+
+    .highlight {
+      color: #4b3bf6;
+    }
+
+    .user-id-display {
+      text-align: center;
+      font-size: 1.1rem;
+      margin-top: 2rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .first-task {
+      text-align: center;
+      font-weight: bold;
+      margin-bottom: 1.5rem;
+    }
+
+    .buttons {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+    }
+
+    .button {
+      background: #ecebff;
+      color: #333;
+      padding: 1rem 2rem;
+      font-size: 1rem;
+      border: none;
+      border-radius: 16px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .button:hover {
+      background: #dad6fd;
+    }
+
+    .timer {
+      text-align: center;
+      font-size: 1rem;
+      margin-top: 1rem;
+      color: #4b3bf6;
+      font-weight: bold;
+    }
+
+    .stop-button {
+      display: block;
+      margin: 1rem auto;
+      padding: 0.75rem 1.5rem;
+      background-color: #4b3bf6;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    .stop-button:hover {
+      background-color: #392dd4;
+    }
+  </style>
+</head>
+<body>
+  <h1>Instruction of Two Prototypes</h1>
+
+  <div class="section-title">4 steps for <span class="highlight">Test A</span></div>
+  <div class="step-container">
+    <div class="step">
+      <div class="step-title">Login</div>
+      <div>(Input User ID & Password)</div>
+    </div>
+    <div class="step">
+      <div class="step-title">Find the Machine</div>
+      <div>(Name: Tencor)</div>
+    </div>
+    <div class="step">
+      <div class="step-title">View Details from</div>
+      <div>Machine</div>
+    </div>
+    <div class="step">
+      <div class="step-title">Logout</div>
+    </div>
+  </div>
+
+  <div class="section-title">4 steps for <span class="highlight">Test B</span></div>
+  <div class="step-container">
+    <div class="step">
+      <div class="step-title">Find the Machine with AR</div>
+      <div>(Plasma Etcher B-14)</div>
+    </div>
+    <div class="step">
+      <div class="step-title">Login</div>
+      <div>(Iris Scanning)</div>
+    </div>
+    <div class="step">
+      <div class="step-title">View Details</div>
+    </div>
+    <div class="step">
+      <div class="step-title">Logout</div>
+    </div>
+  </div>
+
+  <div class="user-id-display" id="user-id">Your User_ID is ...</div>
+  <div class="first-task" id="first-task">Do the Test ... First</div>
+
+  <div class="buttons">
+    <button class="button" id="btn-a">Test A</button>
+    <button class="button" id="btn-b">Test B</button>
+  </div>
+
+  <div class="timer" id="timer-display"></div>
+  <button id="stop-button" class="stop-button" style="display:none">Stop Timer</button>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const userId = params.get("user") || "Unknown";
+    const userDisplay = document.getElementById("user-id");
+    const firstTask = document.getElementById("first-task");
+    const isEven = parseInt(userId.slice(-1)) % 2 === 0;
+    const timerDisplay = document.getElementById("timer-display");
+    const stopButton = document.getElementById("stop-button");
+
+    let startTime;
+    let activeTest = null;
+
+    userDisplay.textContent = `Your User_ID is ${userId}`;
+    firstTask.textContent = `Do the Test ${isEven ? "B" : "A"} First`;
+
+    document.getElementById("btn-a").addEventListener("click", () => {
+      startTimer("A");
+      window.open(`https://control-prototype.vercel.app?user=${userId}`, "_blank");
+    });
+
+    document.getElementById("btn-b").addEventListener("click", () => {
+      startTimer("B");
+    });
+
+    stopButton.addEventListener("click", stopTimer);
+
+    function startTimer(testType) {
+      startTime = Date.now();
+      activeTest = testType;
+      timerDisplay.textContent = `Timer started for Test ${testType}`;
+      stopButton.style.display = "block";
+    }
+
+    function stopTimer() {
+      const endTime = Date.now();
+      const duration = Math.floor((endTime - startTime) / 1000);
+      timerDisplay.textContent = `Timer stopped. Duration: ${duration} seconds.`;
+      stopButton.style.display = "none";
+
+      const url = "https://script.google.com/macros/s/AKfycbyB1fHP1FsQY-cVCdgVgVy7AFxXgy6Jtg_w1ULMC7bjDQO89ZymCIJHqZShh92XizYu/exec";
+      const data = new URLSearchParams();
+      data.append("userId", userId);
+      data.append("testType", activeTest);
+      data.append("duration", duration);
+
+      fetch(url, {
+        method: "POST",
+        body: data,
+      })
+        .then((response) => response.text())
+        .then((result) => {
+          console.log("Logged:", result);
+        })
+        .catch((error) => {
+          console.error("Error logging to sheet:", error);
+        });
+    }
+  </script>
+</body>
+</html>
+
