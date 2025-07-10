@@ -1,203 +1,664 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Prototype Instructions</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Instruction of Two Prototypes</title>
   <style>
     body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: #f7f7fb;
-      padding: 2rem;
+      font-family: 'Inter', Arial, sans-serif;
+      background: #fafbfc;
       margin: 0;
-      color: #2c2c2c;
+      color: #222;
     }
-
+    .header-img {
+      width: 100vw;
+      max-height: 260px;
+      object-fit: cover;
+      display: block;
+    }
+    .container {
+      max-width: 1100px;
+      margin: -60px auto 0 auto;
+      background: #fff;
+      border-radius: 18px;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+      padding: 40px 32px 32px 32px;
+      position: relative;
+      z-index: 2;
+    }
     h1 {
       text-align: center;
       font-size: 2rem;
-      margin-bottom: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 18px;
     }
-
-    .section-title {
-      font-size: 1.25rem;
-      margin: 2rem 0 1rem;
-      font-weight: bold;
+    .scenario {
+      margin-bottom: 32px;
     }
-
-    .step-container {
+    .scenario b, .scenario strong {
+      color: #222;
+    }
+    .scenario a {
+      color: #2d6cdf;
+      text-decoration: none;
+      font-weight: 500;
+    }
+    .steps-section {
+      margin-bottom: 20px;
+    }
+    .steps-title {
+      font-weight: 700;
+      margin-bottom: 10px;
+      color: #222;
+    }
+    .steps-box {
+      background: #f7f8fa;
+      border-radius: 16px;
+      padding: 24px 18px;
       display: flex;
-      justify-content: center;
-      gap: 1rem;
-      flex-wrap: wrap;
-      margin-bottom: 1rem;
+      flex-direction: column;
+      gap: 18px;
+      margin-bottom: 18px;
+      border: 1px solid #e3e6ea;
     }
-
+    .steps-flow {
+      display: flex;
+      align-items: stretch;
+      justify-content: space-between;
+      gap: 32px;
+      flex-wrap: nowrap;
+      width: 100%;
+    }
     .step {
-      background: #ecebff;
-      border-radius: 12px;
-      padding: 1rem;
+      flex: 1 1 0;
+      min-width: 180px;
+      max-width: 220px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
       text-align: center;
-      width: 180px;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+      position: relative;
+      height: 100%;
+      margin: 0;
     }
-
-    .step-title {
-      font-weight: bold;
-      margin-bottom: 0.5rem;
-    }
-
-    .highlight {
-      color: #4b3bf6;
-    }
-
-    .user-id-display {
-      text-align: center;
+    .step-number {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: #eaf1ff;
+      color: #2d6cdf;
+      font-weight: 700;
       font-size: 1.1rem;
-      margin-top: 2rem;
-      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 8px;
+      margin-top: 2px;
     }
-
-    .first-task {
+    .step-number.green {
+      background: #e6f7e9;
+      color: #1ca85c;
+    }
+    .step-content {
+      background: #fff;
+      border-radius: 10px;
+      padding: 12px 10px;
+      border: 1px solid #e3e6ea;
+      font-size: 0.2rem;
+      min-height: 60px;
+      margin-bottom: 1px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.03);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      height: 100%;
+    }
+    .step-content a {
+      color: #2d6cdf;
+      text-decoration: underline;
+      font-weight: 300;
+    }
+    .step-content .blue {
+      color: #2d6cdf;
+      font-weight: 300;
+    }
+    .step-content .green {
+      color: #1ca85c;
+      font-weight: 300;
+    }
+    .step-content span {
+      font-size: 0.85rem !important;
+      color: #555 !important;
+      font-weight: 300;
+    }
+    .step-title {
+      font-weight: 700;
+      font-size: 1.13rem;
+      display: block;
+      margin-bottom: 4px;
       text-align: center;
-      font-weight: bold;
-      margin-bottom: 1.5rem;
     }
-
-    .buttons {
+    .step-desc {
+      font-weight: 400 !important;
+    }
+    .centered {
+      text-align: center;
+      margin: 24px 0 18px 0;
+      font-size: 1rem;
+    }
+    .test-buttons {
       display: flex;
       justify-content: center;
-      gap: 2rem;
+      gap: 18px;
+      margin-bottom: 32px;
     }
-
-    .button {
-      background: #ecebff;
-      color: #333;
-      padding: 1rem 2rem;
-      font-size: 1rem;
+    .test-btn {
+      background: #eaf1ff;
+      color: #2d6cdf;
       border: none;
       border-radius: 16px;
+      padding: 10px 32px;
+      font-size: 1.4rem;
+      font-weight: 700;
       cursor: pointer;
-      transition: background 0.3s;
+      transition: background 0.2s;
     }
-
-    .button:hover {
-      background: #dad6fd;
+    .test-btn:hover {
+      background: #d2e3ff;
     }
-
-    .timer {
-      text-align: center;
+    .data-section, .overall-section {
+      margin-bottom: 40px;
+    }
+    .data-title {
+      font-weight: 600;
+      color: #2d6cdf;
+      margin-bottom: 10px;
+    }
+    .data-title.green {
+      color: #1ca85c;
+    }
+    .data-box, .overall-box {
+      background: #f7f8fa;
+      border-radius: 16px;
+      padding: 36px 32px;
+      display: flex;
+      gap: 0;
+      border: 1px solid #e3e6ea;
+      flex-wrap: nowrap;
+      width: 100%;
+      max-width: 100%;
+      margin: 0;
+      box-sizing: border-box;
+      align-items: stretch;
       font-size: 1rem;
-      margin-top: 1rem;
-      color: #4b3bf6;
-      font-weight: bold;
     }
-
-    .stop-button {
+    .survey, .overall-label {
+      flex: 1 1 33%;
+      min-width: 180px;
+      margin-bottom: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: flex-start;
+      padding-right: 24px;
+    }
+    .interview, .overall-content {
+      flex: 2 1 67%;
+      min-width: 260px;
+      margin-bottom: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      position: relative;
+    }
+    .survey-title {
+      font-weight: 700;
+      font-size: 1.13rem;
+      color: #1ca85c;
+      margin-bottom: 18px;
+      margin-top: 0;
+      text-align: left;
+    }
+    .interview-title {
+      font-weight: 700;
+      font-size: 1.13rem;
+      color: #2d6cdf;
+      margin-bottom: 18px;
+      margin-top: 0;
+      text-align: left;
+    }
+    .survey-btn {
+      background: #eaf1ff;
+      color: #2d6cdf;
+      border: none;
+      border-radius: 12px;
+      padding: 10px 0;
+      font-size: 1.08rem;
+      font-weight: 700;
+      cursor: pointer;
+      margin: 0 auto 0 auto;
+      width: 80%;
       display: block;
-      margin: 1rem auto;
-      padding: 0.75rem 1.5rem;
-      background-color: #4b3bf6;
-      color: white;
+      text-align: center;
+      transition: background 0.2s;
+      box-shadow: none;
+    }
+    .survey-btn:hover {
+      background: #d2e3ff;
+    }
+    .testB-green-btn {
+      background: #e6f7e9 !important;
+      color: #1ca85c !important;
+    }
+    .testB-green-btn:hover {
+      background: #c6f0d3 !important;
+    }
+    .interview-list, .overall-list {
+      list-style: none;
+      padding-left: 0;
+      margin: 0 0 8px 0;
+      font-size: 1.01rem;
+      color: #222;
+    }
+    .interview-list li, .overall-list li {
+      margin-bottom: 12px;
+      line-height: 1.7;
+      display: flex;
+      align-items: flex-start;
+    }
+    .interview-list li .qnum, .overall-list li .qnum {
+      color: #2d6cdf;
+      font-weight: 700;
+      margin-right: 6px;
+      min-width: 22px;
+      display: inline-block;
+    }
+    .interview-list li .qbold, .overall-list li .qbold {
+      color: #2d6cdf;
+      font-weight: 700;
+      margin-right: 4px;
+    }
+    .record-btn {
+      position: absolute;
+      top: 0;
+      right: 0;
+      background: #f3eaff;
+      color: #7d3eea;
+      border: none;
+      border-radius: 12px;
+      padding: 8px 28px;
+      font-size: 1.08rem;
+      font-weight: 700;
+      cursor: pointer;
+      margin-top: 0;
+      transition: background 0.2s;
+      box-shadow: none;
+      text-align: center;
+    }
+    .record-btn:hover {
+      background: #e3d6ff;
+    }
+    .overall-interview-label {
+      flex: 1 1 33%;
+      min-width: 180px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: flex-start;
+      padding-right: 24px;
+    }
+    .overall-interview-title {
+      font-weight: 700;
+      font-size: 1.08rem;
+      color: #1ca85c;
+      margin-bottom: 10px;
+      margin-top: 0;
+    }
+    .overall-interview-content {
+      flex: 2 1 67%;
+      min-width: 260px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      position: relative;
+    }
+    .overall-interview-list {
+      list-style: decimal inside;
+      padding-left: 0;
+      margin: 0 0 8px 0;
+      font-size: 0.98rem;
+      color: #222;
+    }
+    .overall-interview-list li b {
+      font-weight: 700;
+    }
+    .overall-record-btn {
+      position: absolute;
+      top: 0;
+      right: 0;
+      background: #f3eaff;
+      color: #7d3eea;
       border: none;
       border-radius: 8px;
+      padding: 8px 22px;
+      font-size: 1.1rem;
+      font-weight: 600;
       cursor: pointer;
+      margin-top: 0;
+      transition: background 0.2s;
+      box-shadow: none;
     }
-
-    .stop-button:hover {
-      background-color: #392dd4;
+    .overall-record-btn:hover {
+      background: #e3d6ff;
+    }
+    .overall-divider {
+      width: 1px;
+      background: #e3e6ea;
+      margin: 0 18px;
+      min-height: 40px;
+      align-self: stretch;
+    }
+    .divider {
+      width: 1px;
+      background: #e3e6ea;
+      margin: 0 18px;
+      min-height: 40px;
+      align-self: stretch;
+    }
+    @media (max-width: 1100px) {
+      .container {
+        max-width: 98vw;
+      }
+      .steps-flow, .data-box {
+        flex-wrap: wrap;
+        gap: 18px;
+      }
+      .step, .survey, .interview {
+        min-width: 180px;
+        max-width: 100%;
+      }
+    }
+    @media (max-width: 900px) {
+      .container {
+        padding: 18px 4vw 18px 4vw;
+      }
+      .data-box, .steps-flow {
+        flex-direction: column;
+        gap: 18px;
+      }
+      .step, .survey, .interview {
+        max-width: 100%;
+      }
+    }
+    @media (max-width: 600px) {
+      .container {
+        padding: 8px 2vw 8px 2vw;
+      }
+      h1 {
+        font-size: 1.2rem;
+      }
+      .steps-box, .data-box, .overall-box {
+        padding: 12px 4px;
+      }
+    }
+    /* Add color swap classes for Test A and Test B */
+    .testA-blue {
+      color: #2d6cdf !important;
+    }
+    .testA-blue .qnum, .testA-blue .qbold, .testA-blue .interview-title {
+      color: #2d6cdf !important;
+    }
+    .testB-green {
+      color: #1ca85c !important;
+    }
+    .testB-green .qnum, .testB-green .qbold, .testB-green .interview-title {
+      color: #1ca85c !important;
+    }
+    .overall-black .survey-title,
+    .overall-black .interview-title,
+    .overall-black .qnum,
+    .overall-black .qbold {
+      color: #222 !important;
+    }
+    .green-link {
+      color: #1ca85c !important;
+      font-weight: 600;
+      text-decoration: underline;
+    }
+    .test-prompt-section {
+      margin: 48px 0 48px 0;
+    }
+    .footer {
+      width: 100%;
+      background: #181a1b;
+      color: #d1d5db;
+      text-align: center;
+      padding: 20px 0 16px 0;
+      font-size: 0.98rem;
+      font-family: inherit;
+      letter-spacing: 0.01em;
+      margin-top: 48px;
+      border-top: 1.5px solid #23272a;
+      box-shadow: 0 -2px 8px rgba(0,0,0,0.04);
+      transition: color 0.2s;
+    }
+    .footer span {
+      font-weight: 500;
+      color: #d1d5db;
+      transition: color 0.2s;
+    }
+    .footer span:hover {
+      color: #fff;
     }
   </style>
 </head>
 <body>
-  <h1>Instruction of Two Prototypes</h1>
+  <img src="header.jpg" alt="Cleanroom" class="header-img">
+  <div class="container">
+    <h1>Instruction of Two Prototypes</h1>
+    <div class="scenario">
+      <b>Scenario in <a href="#">cleanroom</a>:</b><br>
+      <p>You are a technician inside a semiconductor cleanroom, <a href="#">fully suited in gloves</a>, <a href="#">face mask</a>, and protective garments. The sterile environment requires precision, speed, and strict adherence to <a href="#">protocol</a>. Your movements are limited by your gear, and every interaction with equipment must be secure and efficient. <span style="color:#2d6cdf;">Stay focused and act as if you're truly on the cleanroom floor.</span></p>
+    </div>
 
-  <div class="section-title">4 steps for <span class="highlight">Test A</span></div>
-  <div class="step-container">
-    <div class="step"><div class="step-title">Login</div><div>(Input User ID & Password)</div></div>
-    <div class="step"><div class="step-title">Find the Machine</div><div>(Name: Tencor)</div></div>
-    <div class="step"><div class="step-title">View Details from</div><div>Machine</div></div>
-    <div class="step"><div class="step-title">Logout</div></div>
+    <!-- Steps for Test A -->
+    <div class="steps-section">
+      <div class="steps-title">4 steps for <span style="color:#2d6cdf;">Test A</span></div>
+      <div class="steps-box">
+        <div class="steps-flow">
+          <div class="step">
+            <div class="step-number">01</div>
+            <div class="step-content"><span class="step-title"><b>Login</b></span><span class="step-desc">Input your <a href="#">User_ID &amp; Password</a> (C864320)</span></div>
+          </div>
+          <div class="step">
+            <div class="step-number">02</div>
+            <div class="step-content"><span class="step-title"><b>Find Machine</b></span><span class="step-desc">Choose the machine name <a href="#">Tencor</a> to start</span></div>
+          </div>
+          <div class="step">
+            <div class="step-number">03</div>
+            <div class="step-content"><span class="step-title"><b>Check Details</b></span><span class="step-desc">Check <span class="blue">temperature</span> and <span class="blue">pressure</span> on machine</span></div>
+          </div>
+          <div class="step">
+            <div class="step-number">04</div>
+            <div class="step-content"><span class="step-title"><b>Logout</b></span><span class="step-desc">Press Logout button</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Steps for Test B -->
+    <div class="steps-section">
+      <div class="steps-title">4 steps for <span style="color:#1ca85c;">Test B</span></div>
+      <div class="steps-box">
+        <div class="steps-flow">
+          <div class="step">
+            <div class="step-number green">01</div>
+            <div class="step-content"><span class="step-title"><b>Find Machine</b></span><span class="step-desc">Stand in front of the machine for scanning</span></div>
+          </div>
+          <div class="step">
+            <div class="step-number green">02</div>
+            <div class="step-content"><span class="step-title"><b>Login</b></span><span class="step-desc">Find machine names <a href="#" class="green-link">Plasma Etcher B-14</a> and <a href="#" class="green-link">verify with iris</a></span></div>
+          </div>
+          <div class="step">
+            <div class="step-number green">03</div>
+            <div class="step-content"><span class="step-title"><b>Check Details</b></span><span class="step-desc">Check <span class="green-link">temperature</span> and <span class="green-link">pressure</span> from details</span></div>
+          </div>
+          <div class="step">
+            <div class="step-number green">04</div>
+            <div class="step-content"><span class="step-title"><b>Logout</b></span><span class="step-desc">Press Logout button</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="test-prompt-section">
+      <div class="centered">
+        Your User_ID is Unknown<br>
+        <b style="font-size:1rem;">Do the Test A First</b>
+      </div>
+      <div class="test-buttons">
+        <button class="test-btn">Test A</button>
+        <button class="test-btn testB-green-btn">Test B</button>
+      </div>
+      <div style="text-align: center; margin-top: 16px;">
+        <button id="stop-button" onclick="stopTimer()" style="display:none;background:#000000;color:white;padding:10px 20px;border:none;border-radius:8px;cursor:pointer;">
+          Stop Timer
+        </button>
+      </div>
+    </div>
+
+    <!-- Data Collection Test A -->
+    <div class="data-section">
+      <div class="data-title">Data Collection of <span style="color:#2d6cdf;">Test A</span></div>
+      <div class="data-box testA-blue">
+        <div class="survey">
+          <div class="survey-title testA-blue">Survey</div>
+          <button onclick="openSurvey('A')" class="survey-btn">Test A Survey</button>
+        </div>
+        <div class="divider"></div>
+        <div class="interview">
+          <div class="interview-title">Interview <button class="record-btn" onclick="window.open('https://app.genio.co/notes/events/collections/c7825cd7-ffd4-4ed7-966a-672664e49a74', '_blank')">Record</button></div>
+          <ol class="interview-list">
+            <li><span class="qnum">1.</span>How secure did you feel while using this authentication method?</span> (Specific aspects made you feel that way)</li>
+            <li><span class="qnum">2.</span>What elements made you trust or distrust the system?</span> (Design, the process, or something else?)</li>
+            <li><span class="qnum">3.</span>How easy or difficult was it to understand and use the authentication process?</span> (Any steps that felt confusing or unclear)</li>
+            <li><span class="qnum">4.</span>Did anything confuse or frustrate you while using the system?</span> (What would have helped in that moment)</li>
+            <li><span class="qnum">5.</span>How did you feel while using this system?</span> (Confident, nervous, frustrated, or something else)</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+
+    <!-- Data Collection Test B -->
+    <div class="data-section">
+      <div class="data-title green">Data Collection of <span style="color:#1ca85c;">Test B</span></div>
+      <div class="data-box testB-green">
+        <div class="survey">
+          <div class="survey-title">Survey</div>
+          <button onclick="openSurvey('B')" class="survey-btn testB-green-btn">Test B Survey</button>
+        </div>
+        <div class="divider"></div>
+        <div class="interview">
+          <div class="interview-title">Interview <button class="record-btn" onclick="window.open('https://app.genio.co/notes/events/collections/d0dae6bb-19f4-4918-8c8d-9eaeaef4042d', '_blank')">Record</button></div>
+          <ol class="interview-list">
+            <li><span class="qnum">1.</span>How secure did you feel while using this authentication method?</span> (Specific aspects made you feel that way)</li>
+            <li><span class="qnum">2.</span>What elements made you trust or distrust the system?</span> (Design, the process, or something else?)</li>
+            <li><span class="qnum">3.</span>How easy or difficult was it to understand and use the authentication process?</span> (Any steps that felt confusing or unclear)</li>
+            <li><span class="qnum">4.</span>Did anything confuse or frustrate you while using the system?</span> (What would have helped in that moment)</li>
+            <li><span class="qnum">5.</span>How did you feel while using this system?</span> (Confident, nervous, frustrated, or something else)</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+
+    <!-- Overall Interview -->
+    <div class="overall-section">
+      <div class="data-box overall-black">
+        <div class="survey">
+          <div class="survey-title" style="color:#000000;">Overall Interview</div>
+        </div>
+        <div class="divider"></div>
+        <div class="interview">
+          <div class="interview-title">Interview<button class="record-btn" onclick="window.open('https://app.genio.co/notes/events/collections/a2e5a524-cd16-4972-a1b3-510659ccc945', '_blank')">Record</button></div>
+          <ol class="interview-list">
+            <li><span class="qnum">1.</span>Between the two systems you tried, which one did you prefer and why?</span> (Preference based on usability, security, or something else)</li>
+          </ol>
+        </div>
+      </div>
+    </div>
   </div>
+    <script>
+      const params = new URLSearchParams(window.location.search);
+      const userId = params.get("user") || "Unknown";
+      const userDisplay = document.querySelector(".test-prompt-section .centered");
+      const testButtons = document.querySelectorAll(".test-btn");
 
-  <div class="section-title">4 steps for <span class="highlight">Test B</span></div>
-  <div class="step-container">
-    <div class="step"><div class="step-title">Find the Machine with AR</div><div>(Plasma Etcher B-14)</div></div>
-    <div class="step"><div class="step-title">Login</div><div>(Iris Scanning)</div></div>
-    <div class="step"><div class="step-title">View Details</div></div>
-    <div class="step"><div class="step-title">Logout</div></div>
-  </div>
+      const isEven = parseInt(userId.slice(-1)) % 2 === 0;
+      let startTime;
+      let activeTest = null;
 
-  <div class="user-id-display" id="user-id">Your User_ID is ...</div>
-  <div class="first-task" id="first-task">Do the Test ... First</div>
+      // 更新 User ID 與提示
+      if (userDisplay) {
+        userDisplay.innerHTML = `Your User_ID is <b>${userId}</b><br><b style="font-size:1rem;">Do the Test ${isEven ? "B" : "A"} First</b>`;
+      }
 
-  <div class="buttons">
-    <button class="button" id="btn-a">Test A</button>
-    <button class="button" id="btn-b">Test B</button>
-  </div>
-
-  <div class="timer" id="timer-display"></div>
-  <button id="stop-button" class="stop-button" style="display:none">Stop Timer</button>
-
-  <script>
-    const params = new URLSearchParams(window.location.search);
-    const userId = params.get("user") || "Unknown";
-    const userDisplay = document.getElementById("user-id");
-    const firstTask = document.getElementById("first-task");
-    const isEven = parseInt(userId.slice(-1)) % 2 === 0;
-    const timerDisplay = document.getElementById("timer-display");
-    const stopButton = document.getElementById("stop-button");
-
-    let startTime;
-    let activeTest = null;
-
-    userDisplay.textContent = `Your User_ID is ${userId}`;
-    firstTask.textContent = `Do the Test ${isEven ? "B" : "A"} First`;
-
-    document.getElementById("btn-a").addEventListener("click", () => {
-      startTimer("A");
-      window.open(`https://control-prototype.vercel.app?user=${userId}`, "_blank");
-    });
-
-    document.getElementById("btn-b").addEventListener("click", () => {
-      startTimer("B");
-    });
-
-    stopButton.addEventListener("click", stopTimer);
-
-    function startTimer(testType) {
-      startTime = Date.now();
-      activeTest = testType;
-      timerDisplay.textContent = `Timer started for Test ${testType}`;
-      stopButton.style.display = "block";
-    }
-
-    function stopTimer() {
-      const endTime = Date.now();
-      const duration = Math.floor((endTime - startTime) / 1000);
-      timerDisplay.textContent = `Timer stopped. Duration: ${duration} seconds.`;
-      stopButton.style.display = "none";
-
-      fetch("https://bonny80.app.n8n.cloud/webhook/184eaf31-08ba-4bbe-af34-7536e51ffb8b", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-          userId: userId,
-          test: activeTest,
-          duration: duration
-        })
-      })
-      .then(res => res.text())
-      .then(data => {
-        console.log("Success:", data);
-      })
-      .catch(error => {
-        console.error("Logging failed:", error);
+      // 綁定按鈕事件
+      testButtons[0].addEventListener("click", () => {
+        activeTest = "A";
+        startTimer();
+        window.open(`https://control-prototype.vercel.app?user=${userId}`, "_blank");
       });
-    }
-  </script>
-</body>
-</html>
 
+      testButtons[1].addEventListener("click", () => {
+        activeTest = "B";
+        startTimer();
+      });
+
+      function startTimer() {
+        startTime = Date.now();
+        document.getElementById("stop-button").style.display = "inline-block";
+      }
+
+      // 停止 timer 並送出資料（你可以改成觸發條件，例如按 stop 鈕）
+      function stopTimer() {
+        if (!startTime || !activeTest) return;
+        const endTime = Date.now();
+        const duration = Math.floor((endTime - startTime) / 1000);
+        console.log(`Timer stopped. Duration: ${duration}s`);
+
+        fetch("https://bonny80.app.n8n.cloud/webhook/184eaf31-08ba-4bbe-af34-7536e51ffb8b", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            userId: userId,
+            test: activeTest,
+            duration: duration
+          })
+        })
+        .then(res => res.text())
+        .then(data => {
+          console.log("Submitted to webhook:", data);
+        })
+        .catch(err => console.error("Webhook error:", err));
+      }
+
+      // 暴露給你在其他地方可以 call
+      window.stopTimer = stopTimer;
+    </script>
+    <script>
+      function openSurvey(testType) {
+        const baseUrlA = "https://docs.google.com/forms/d/e/1FAIpQLSeZhBc_URXe98qpeWMdACjBU02atrGGVl57tZ3NtiBQh637JA/viewform?usp=pp_url";
+        const baseUrlB = "https://docs.google.com/forms/d/e/1FAIpQLSd63B-tuGOgBnKLV6MGgHwHN2My6vs8cwqB9RX8uvSV0ipRpg/viewform?usp=pp_url";
+    
+        const fieldKey = "entry.539946492"; // user ID 填入的欄位代號
+    
+        const url = (testType === "A" ? baseUrlA : baseUrlB) + `&${fieldKey}=${encodeURIComponent(userId)}`;
+        window.open(url, "_blank");
+      }
+    </script>
+    
+    <footer class="footer"><span>&copy; Made by tired Bonny because the GPT is not working at all</span></footer>
+
+</body>
+</html> 
