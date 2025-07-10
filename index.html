@@ -521,6 +521,9 @@
         <button class="test-btn">Test A</button>
         <button class="test-btn testB-green-btn">Test B</button>
       </div>
+      <div id="timer-container" style="text-align:center; margin-top:8px; font-size:1.2rem; font-weight:600; color:#2d6cdf; display:none;">
+        Time: <span id="timer-display">0</span> s
+      </div>
       <div style="text-align: center; margin-top: 16px;">
         <button id="stop-button" onclick="stopTimer()" style="display:none;background:#000000;color:white;padding:10px 20px;border:none;border-radius:8px;cursor:pointer;">
           Stop Timer
@@ -595,7 +598,8 @@
       const testButtons = document.querySelectorAll(".test-btn");
 
       const isEven = parseInt(userId.slice(-1)) % 2 === 0;
-      let startTime;
+      let timerInterval = null;
+      let startTime = null;
       let activeTest = null;
 
       // 更新 User ID 與提示
@@ -618,6 +622,13 @@
       function startTimer() {
         startTime = Date.now();
         document.getElementById("stop-button").style.display = "inline-block";
+        document.getElementById("timer-container").style.display = "block";
+        document.getElementById("timer-display").textContent = "0";
+        if (timerInterval) clearInterval(timerInterval);
+        timerInterval = setInterval(() => {
+          const elapsed = Math.floor((Date.now() - startTime) / 1000);
+          document.getElementById("timer-display").textContent = elapsed;
+        }, 1000);
       }
 
       // 停止 timer 並送出資料（你可以改成觸發條件，例如按 stop 鈕）
@@ -625,6 +636,9 @@
         if (!startTime || !activeTest) return;
         const endTime = Date.now();
         const duration = Math.floor((endTime - startTime) / 1000);
+        clearInterval(timerInterval);
+        document.getElementById("stop-button").style.display = "none";
+        document.getElementById("timer-container").style.display = "none";
         console.log(`Timer stopped. Duration: ${duration}s`);
 
         fetch("https://bonny80.app.n8n.cloud/webhook/184eaf31-08ba-4bbe-af34-7536e51ffb8b", {
