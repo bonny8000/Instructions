@@ -101,8 +101,8 @@
       margin-top: 2px;
     }
     .step-number.green {
-      background: #e6f4ea;
-      color: #15803d;
+      background: #e6f7ed !important; /* 淡綠色背景 */
+      color: #43b66e !important;      /* 綠色字 */
     }
     .step-content {
       background: #fff;
@@ -536,6 +536,17 @@
     .survey-title-green {
       color: #15803d !important;
     }
+    .step-title {
+      color: #2563eb !important;
+      font-weight: bold !important;
+    }
+    .step-number {
+      color: #2563eb !important;
+      background: #eaf1ff !important;
+    }
+    .green {
+      color: #43b66e !important; /* 你可以換成你想要的綠色 */
+    }
   </style>
 </head>
 <body>
@@ -565,8 +576,7 @@
     <!-- Scenario for Test A (Password-based) -->
     <div class="scenario section-gap">
       <div class="steps-title">Scenario for <span class="interview-title-blue">Test A (Password-based)</span></div>
-      <p class="scenario-desc scenario-desc-a">You are a technician working inside a semiconductor cleanroom. You are fully suited in protective garments, including gloves, a face mask, and a cleanroom suit. Your vision and movement are slightly restricted, and every task must be performed with high accuracy and adherence to protocol. You are assigned to inspect a piece of equipment, but before doing so, you must first log in to the system using a traditional username and password interface.<br>
-      To begin, you connect your laptop to the machine via cable. A <a href="#" style="color:#2563eb;">login screen</a> appears, and you carefully <a href="#" style="color:#2563eb;">type your ID and password — gloves make typing harder</a>, so accuracy matters. Once logged in, you can check key data like <span style="color:#2563eb;">pressure</span> and <span style="color:#2563eb;">temperature</span>. The process is routine but must be done quickly and securely despite the physical constraints.</p>
+      <p class="scenario-desc scenario-desc-a">You are a technician working inside a semiconductor cleanroom (dust-free space used in high-tech manufacturing). You are fully suited in protective garments, including gloves, a face mask, and a cleanroom suit. Your vision and movement are slightly restricted, and every task must be performed with high accuracy and adherence to protocol.<br>You are assigned to inspect a specific piece of equipment. To do so, you must first locate the machine and connect your laptop to it via cable. A <span style="color:#2563eb;">login screen</span> appears, and you carefully type your <span style="color:#2563eb;">ID and password</span> — gloves make typing harder, so accuracy matters. Once logged in, you need to check key data like <span style="color:#2563eb;">pressure</span> and <span style="color:#2563eb;">temperature</span>. The process is routine but must be done quickly and securely despite the physical constraints.</p>
     </div>
     <!-- Steps for Test A (Password-based) -->
     <div class="steps-section section-gap steps-gap-a">
@@ -575,19 +585,19 @@
         <div class="steps-flow">
           <div class="step">
             <div class="step-number">01</div>
-            <div class="step-content"><span class="step-title"><b>Login</b></span><span class="step-desc">Input your <a href="#">User_ID &amp; Password</a> (Cc832047.)</span></div>
+            <div class="step-content"><span class="step-title"><b>Connect & Locate</b></span><span class="step-desc">Find the assigned machine (Tencor) and connect the laptop via cable.</span></div>
           </div>
           <div class="step">
             <div class="step-number">02</div>
-            <div class="step-content"><span class="step-title"><b>Find Machine</b></span><span class="step-desc">Choose the machine name <a href="#">Tencor</a> to start</span></div>
+            <div class="step-content"><span class="step-title"><b>Log In</b></span><span class="step-desc">Enter your <span style="color:#2563eb;">User_ID and Password</span> (Cc832047) to access the machine system.</span></div>
           </div>
           <div class="step">
             <div class="step-number">03</div>
-            <div class="step-content"><span class="step-title"><b>Check Details</b></span><span class="step-desc">Check <span style="color:#2563eb;">temperature</span> and <span style="color:#2563eb;">pressure</span> on machine</span></div>
+            <div class="step-content"><span class="step-title"><b>Check Data</b></span><span class="step-desc">Once logged in, review the machine’s key information: <span style="color:#2563eb;">temperature</span> and <span style="color:#2563eb;">pressure</span>.</span></div>
           </div>
           <div class="step">
             <div class="step-number">04</div>
-            <div class="step-content"><span class="step-title"><b>Logout</b></span><span class="step-desc">Press Logout button</span></div>
+            <div class="step-content"><span class="step-title"><b>Logout</b></span><span class="step-desc">When finished, press the <span style="color:#2563eb;">Logout</span> button to securely exit the system.</span></div>
           </div>
         </div>
       </div>
@@ -612,8 +622,8 @@
     <!-- Scenario for Test B (Augmented Reality with Iris Scanning) -->
     <div class="scenario section-gap">
       <div class="steps-title">Scenario for <span class="interview-title-green">Test B (Augmented Reality with Iris Scanning)</span></div>
-      <p class="scenario-desc scenario-desc-b">You are a technician working inside a semiconductor cleanroom. You are fully suited in protective garments, including gloves, a face mask, and a cleanroom suit. Your vision and movement are slightly restricted, and every task must be performed with high accuracy and adherence to protocol. You are assigned to inspect a piece of equipment, but before doing so, you must first complete identity verification using an AR-based iris scanning system.<br>
-      To begin, you hold your <a href="#">mobile device</a> in front of the machine. The <a href="#">AR interface</a> automatically detects the equipment and overlays its name. You proceed to align your eyes with the phone camera to do the <a href="#">iris scanning</a>. Once your identity is confirmed, the screen displays detail data like <span style="color:#15803d;">pressure</span> and <span style="color:#15803d;">temperature</span>. The process requires precision but eliminates the need for physical input, allowing you to complete the task while maintaining sterile conditions.</p>
+      <p class="scenario-desc scenario-desc-b" style="font-weight:400;">You are a technician working inside a semiconductor cleanroom (dust-free space used in high-tech manufacturing). You are fully suited in protective garments, including gloves, a face mask, and a cleanroom suit. You are assigned to inspect a piece of equipment, but before doing so, you must first complete identity verification using an AR-based iris scanning system.<br>
+      To begin, you hold your <a href="#" style="text-decoration:none;">mobile device</a> in front of the machine. The <a href="#" style="text-decoration:none;">AR interface</a> automatically detects the equipment and overlays its name. You proceed to align your eyes with the phone camera to do the <a href="#" style="text-decoration:none;">iris scanning</a>. Once your identity is confirmed, the screen displays detail data like <span style="color:#15803d;">pressure</span> and <span style="color:#15803d;">temperature</span>. The process requires precision but eliminates the need for physical input, allowing you to complete the task while maintaining sterile conditions.</p>
     </div>
     <!-- Steps for Test B (Augmented Reality with Iris Scanning) -->
     <div class="steps-section section-gap steps-gap-b">
@@ -646,23 +656,23 @@
       <div class="data-box overall-black">
         <div class="interview" style="width:100%;">
           <div class="interview-title">Interview <button class="record-btn" onclick="openRecordLink()">Record</button></div>
-          <ol class="interview-list">
-            <li>How secure did you feel while using Test A (Password-based) authentication system?</li>
-            <li>What made you feel that the system was trustworthy or untrustworthy?</li>
-            <li>How easy or difficult was it to understand and use the authentication process?</li>
-            <li>How did you feel while overall using this system?</li>
-          </ol>
+          <div class="interview-list" style="margin-bottom: 18px;">
+            Can you describe your experience using the password-based login system?<br><br>
+            During this process, what aspects of this system impressed you?<br><br>
+            How did you feel about the security of this authentication method?<br><br>
+            What made you feel that the system was trustworthy or untrustworthy?
+          </div>
           <hr style="margin:20px 0; border: none; border-top: 2px solid #e3e6ea;">
-          <ol class="interview-list">
-            <li>How secure did you feel while using Test B (Augmented Reality with Iris Scanning) authentication system?</li>
-            <li>What made you feel that the system was trustworthy or untrustworthy?</li>
-            <li>How easy or difficult was it to understand and use the authentication process?</li>
-            <li>How did you feel while overall using this system?</li>
-          </ol>
+          <div class="interview-list" style="margin-bottom: 18px;">
+            Can you describe your experience using the AR login system with iris scanning?<br><br>
+            During this process, what aspects of this system impressed you?<br><br>
+            How did you feel about the security of this authentication method?<br><br>
+            What made you feel that the system was trustworthy or untrustworthy?
+          </div>
           <hr style="margin:20px 0; border: none; border-top: 2px solid #e3e6ea;">
-          <ol class="interview-list">
-            <li>Compared to these two, which one do you prefer more when you do the authentication, and what make you think in that way?</li>
-          </ol>
+          <div class="interview-list" style="margin-bottom: 18px;">
+            Compared to these two, which one do you prefer more when you do the authentication, and what makes you think in that way?
+          </div>
         </div>
       </div>
     </div>
